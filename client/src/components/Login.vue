@@ -1,26 +1,24 @@
 <template>
   <v-layout align-center >
     <v-flex xs6 offset-xs3>
-        <panel title='Register'>
-          <form
-          autocomplete="off">
-          <v-text-field
-            type="email"
-            name="email"
-            v-model="email"
-            label="Email"></v-text-field>
-          <br />
-          <v-text-field
-            type="password"
-            name="password"
-            v-model="password"
-            label="password"
-            autocomplete="new-password"></v-text-field>
-          <br />
-          <div v-html="error" class='error'></div>
-          <br />
-          <v-btn class="grey" dark @click="register">Register</v-btn>
-        </form>
+      <panel title='Log In'>
+          <form autocomplete="off">
+            <v-text-field
+              type="email"
+              name="email"
+              v-model="email"
+              label="Email"></v-text-field>
+            <br />
+            <v-text-field
+              type="password"
+              name="password"
+              v-model="password"
+              label="password"></v-text-field>
+
+            <div v-html="error" class='error'></div>
+            <br />
+            <v-btn class="grey" dark @click="login">Login</v-btn>
+          </form>
         </panel>
     </v-flex>
   </v-layout>
@@ -30,7 +28,7 @@
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
       email: '',
@@ -42,15 +40,15 @@ export default {
     Panel
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        const response = await AuthenticationService.register({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        // console.log(response.data)
+        console.log(response.data)
       } catch (error) {
         this.error = error.response.data.error
       }
