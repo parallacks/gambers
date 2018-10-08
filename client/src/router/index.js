@@ -4,7 +4,9 @@ import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Trips from '@/components/Trips'
+import ViewTrip from '@/components/ViewTrip'
 import CreateTrip from '@/components/CreateTrip'
+import ManageUsers from '@/components/ManageUsers'
 
 Vue.use(Router)
 
@@ -31,9 +33,19 @@ export default new Router({
       component: Trips
     },
     {
+      path: '/trips/:tripId',
+      name: 'ViewTrip',
+      component: ViewTrip
+    },
+    {
       path: '/createtrip',
       name: 'CreateTrip',
       component: CreateTrip
+    },
+    {
+      path: '/manageusers',
+      name: 'ManageUsers',
+      component: ManageUsers
     }
   ]
 })

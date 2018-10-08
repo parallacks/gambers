@@ -8,7 +8,18 @@ module.exports = {
       })
       res.send(trips)
     } catch (err) {
-      res.status(400).send({
+      res.status(500).send({
+        error: 'Trips not found'
+      })
+    }
+  },
+  async show (req, res) {
+    try {
+      const trip = await Trip.findById(req.params.tripId)
+      console.log('This is working fine')
+      res.send(trip)
+    } catch (err) {
+      res.status(500).send({
         error: 'Trips not found'
       })
     }
@@ -18,7 +29,7 @@ module.exports = {
       const trip = await Trip.create(req.body)
       res.send(trip)
     } catch(err) {
-      res.status(400).send({
+      res.status(500).send({
         error: 'Unable to create trip'
       })
     }

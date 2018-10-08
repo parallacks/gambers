@@ -5,9 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     minPlayerRating: DataTypes.SMALLINT,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE,
-    locationImageURL: DataTypes.STRING
+    locationImageURL: DataTypes.STRING,
+    description: DataTypes.STRING,
+    tripSize: DataTypes.SMALLINT,
+    active: DataTypes.BOOLEAN
   })
-
 
   return Trip
 }

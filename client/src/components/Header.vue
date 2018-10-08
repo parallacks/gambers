@@ -10,6 +10,11 @@
       View Trips
     </v-btn>
   </v-toolbar-items>
+  <v-toolbar-items class="adminTabs" v-if="$store.state.accessLevel>0">
+    <v-btn dark @click="navigateTo({name:'CreateTrip'})">
+      Create Trip
+    </v-btn>
+  </v-toolbar-items>
   <v-spacer></v-spacer>
   <v-toolbar-items v-if="!$store.state.isUserLoggedIn">
     <v-btn dark @click="navigateTo({name:'Login'})">
@@ -50,5 +55,8 @@ export default {
 }
 .link:hover{
   background-color: #464646
+}
+.adminTabs{
+  color: #0bcef4;
 }
 </style>
