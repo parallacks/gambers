@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div id="app" class="grey">
   <v-app>
     <page-header/>
     <main>
@@ -29,6 +29,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #a4a4aa;
 }
 .danger-alert{
   color: red;

@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
+    accessLevel: 0,
     isUserLoggedIn: false
   },
   mutations: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setAccessLevel (state, accessLevel) {
+      state.accessLevel = accessLevel
     }
   },
   actions: {
@@ -28,7 +32,10 @@ export default new Vuex.Store({
       commit('setToken', token)
     },
     setUser ({commit}, user) {
-      commit('setToken', user)
+      commit('setUser', user)
+    },
+    setAccessLevel ({commit}, accessLevel) {
+      commit('setAccessLevel', accessLevel)
     }
   }
 })

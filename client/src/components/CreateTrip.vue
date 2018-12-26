@@ -1,6 +1,7 @@
 <template>
   <v-layout >
-    <v-flex xs6 offset-xs3>
+
+    <v-flex xs6 offset-xs3 v-if="$store.state.user.accessLevel"> 0>
       <panel title="Trip Metadata">
         <v-text-field
           label="Title"
@@ -99,6 +100,11 @@
           @click="create">Create</v-btn>
       </panel>
     </v-flex>
+    <v-flex xs6 offset-xs3 v-else>
+      <panel>
+        Sorry you don't have the permission needed to access this page. If you believe this is an error please contact your site administrator.
+      </panel>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -142,7 +148,7 @@ export default {
         const trip = await TripsService.post(this.trip)
         this.$router.push({
           name: 'ViewTrip',
-          params:{tripId: trip.id}
+          params: {tripId: trip.id}
         })
       } catch (err) {
         console.log(err)

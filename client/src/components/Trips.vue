@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center >
-    <v-flex xs8 offset-xs2>
+    <v-flex xs10>
       <panel title='Trips'>
         <v-card>
           <v-container
@@ -11,7 +11,7 @@
               wrap>
               <v-flex
                 v-for="trip in trips"
-                xs6
+                xs4
                 :key="trip.name">
                 <v-card>
                   <v-img

@@ -7,8 +7,17 @@
 </template>
 
 <script>
-export default{
+import Panel from '@/components/Panel'
+export default {
   data () {
+    return {
+      users: []
+    }
+  },
+  components: {
+    Panel
+  },
+  async mounted () {
 
   }
 }
@@ -17,3 +26,5 @@ export default{
 <style scoped>
 
 </style>
+
+

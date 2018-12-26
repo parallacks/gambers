@@ -48,6 +48,9 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setAccessLevel', response.data.user.accessLevel)
+        this.$router.push({name: 'root'})
+        // TODO Remove before release
         console.log(response.data)
       } catch (error) {
         this.error = error.response.data.error
@@ -63,6 +66,6 @@ export default {
     background-color: #3f4141;
   }
   .error{
-    color: red;
+    color: black;
   }
 </style>
