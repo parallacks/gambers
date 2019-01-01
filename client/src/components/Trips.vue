@@ -1,21 +1,29 @@
 <template>
   <v-layout justify-center >
+    <v-flex xs2>
+      <panel title="Search">
+
+      </panel>
+    </v-flex>
     <v-flex xs10>
       <panel title='Trips'>
         <v-card>
           <v-container
             fluid
+            dark
             grid-list-md>
             <v-layout
               row
+              dark
               wrap>
-              <v-flex
-                v-for="trip in trips"
-                xs4
-                :key="trip.name">
-                <v-card>
+                <v-card
+                  v-for="trip in trips"
+                  xs3
+                  class = "trip_card"
+                  dark
+                  :key="trip.name">
                   <v-img
-                    :src="trip.locationImageURL"
+                    :src="trip.location_image_url"
                     height="200px">
                     <v-container
                       fill-height
@@ -32,16 +40,18 @@
                   </v-img>
 
                   <v-card-actions>
+                    <v-card-text>
+                      {{new Date(trip.start_date).toLocaleDateString("en-US")}} -- {{new Date(trip.end_date).toLocaleDateString("en-US")}}
+                    </v-card-text>
                    <v-spacer></v-spacer>
                      <v-btn
                       dark
                       class='black'
-                      @click="navigateTo({name:'ViewTrip', params:{tripId: trip.id}})">
+                      @click="navigateTo({name: 'ViewTrip', params: {tripId: trip.id}})">
                        More Info
                      </v-btn>
                   </v-card-actions>
                 </v-card>
-              </v-flex>
             </v-layout>
           </v-container>
         </v-card>
@@ -51,9 +61,10 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-import TripsService from '@/services/TripsService'
+import Panel from '../components/Panel'
+import TripsService from '../services/TripsService'
 export default {
+  name: 'Trips',
   data () {
     return {
       trips: []
@@ -76,23 +87,10 @@ export default {
 </script>
 
 <style scoped>
-.trip{
-  padding: 20px;
-  height: 330px;
+.trip_card{
+  margin: 10px;
+  width: 425px;
   overflow: hidden;
-  background-color: rgb(205, 200, 200);
 }
-.trip-image{
-  width: 70%;
-  margin: 0 auto;
-}
-.trip-title{
-  font-size: 30px;
-}
-.trip-location{
-  font-size: 24px;
-}
-.trip-size{
-  font-size: 18px;
-}
+
 </style>

@@ -4,10 +4,9 @@
       <panel title='Log In'>
           <form autocomplete="off">
             <v-text-field
-              type="email"
-              name="email"
-              v-model="email"
-              label="Email"></v-text-field>
+              name="username"
+              v-model="username"
+              label="Username"></v-text-field>
             <br />
             <v-text-field
               type="password"
@@ -19,19 +18,21 @@
             <br />
             <v-btn class="grey" dark @click="login">Login</v-btn>
           </form>
+
+        <v-btn class ="grey registerLink" dark @click="navigateTo({name: 'Register'})">Don't have an account? Click here to register</v-btn>
         </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
+import AuthenticationService from '../services/AuthenticationService'
+import Panel from '../components/Panel'
 export default {
   name: 'Login',
   data () {
     return {
-      email: '',
+      username: '',
       password: '',
       error: ''
     }
@@ -43,12 +44,12 @@ export default {
     async login () {
       try {
         const response = await AuthenticationService.login({
-          email: this.email,
+          username: this.username,
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        this.$store.dispatch('setAccessLevel', response.data.user.accessLevel)
+        this.$store.dispatch('setAccessLevel', response.data.user.access_level)
         this.$router.push({name: 'root'})
         // TODO Remove before release
         console.log(response.data)
@@ -67,5 +68,9 @@ export default {
   }
   .error{
     color: black;
+  }
+  .registerLink {
+    color: crimson;
+    background-color: dimgray;
   }
 </style>

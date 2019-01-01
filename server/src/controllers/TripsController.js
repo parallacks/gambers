@@ -20,7 +20,7 @@ module.exports = {
       res.send(trip)
     } catch (err) {
       res.status(500).send({
-        error: 'Trips not found'
+        error: 'Trip not found'
       })
     }
   },

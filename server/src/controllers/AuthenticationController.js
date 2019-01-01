@@ -19,18 +19,18 @@ module.exports = {
         token: jwtSignUser(userJson)
       })
     } catch (err) {
-      //email already exists
-        res.status(400).send({
-          error: 'The email already has an account'
-        })
+      // email already exists
+      res.status(400).send({
+        error: 'The email already has an account'
+      })
     }
   },
-  async login (req,res){
+  async login (req, res) {
     try {
-      const {email, password} = req.body
+      const {username, password} = req.body
       const user = await User.findOne({
         where:{
-          email:email
+          username: username
         }
       })
       if(!user){
@@ -53,9 +53,9 @@ module.exports = {
       })
     } catch (err) {
       //email already exists
-        res.status(500).send({
-          error: 'An error has occured trying to login.'
-        })
+      res.status(500).send({
+        error: 'An error has occured trying to login.'
+      })
     }
   }
 }

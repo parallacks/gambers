@@ -4,19 +4,25 @@
       <panel v-bind:title="'Trip to ' + trip.name">
         <v-layout>
           <v-flex xs3>
-            <img class= trip-image :src="trip.locationImageURL" />
+            <img class= trip-image :src="trip.location_image_url" />
           </v-flex>
           <v-flex xs4>
             {{trip.location }}
             <br />
-            Starts: {{new Date(trip.startDate).toLocaleDateString("en-US")}}
+            Starts: {{new Date(trip.start_date).toLocaleDateString("en-US")}}
             <br />
-            Ends: {{new Date(trip.endDate).toLocaleDateString("en-US")}}
+            Ends: {{new Date(trip.end_date).toLocaleDateString("en-US")}}
           </v-flex>
           <v-flex>
             <textarea
             readonly
             v-model="trip.description"></textarea>
+            <div>
+              <v-btn
+                @click="navigateTo({name: 'TripApplication'})">
+                Register Now!
+              </v-btn>
+            </div>
           </v-flex>
         </v-layout>
       </panel>
@@ -43,6 +49,11 @@ export default {
   },
   components: {
     Panel
+  },
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
+    }
   }
 }
 </script>

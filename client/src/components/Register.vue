@@ -1,14 +1,13 @@
 <template>
   <v-layout align-center >
     <v-flex xs6 offset-xs3>
-        <panel title='Register'>
-          <form
+      <panel title='Register'>
+        <form
           autocomplete="off">
           <v-text-field
-            type="email"
-            name="email"
-            v-model="email"
-            label="Email"></v-text-field>
+            name="username"
+            v-model="username"
+            label="Username"></v-text-field>
           <br />
           <v-text-field
             type="password"
@@ -21,7 +20,7 @@
           <br />
           <v-btn class="grey" dark @click="register">Register</v-btn>
         </form>
-        </panel>
+      </panel>
     </v-flex>
   </v-layout>
 </template>
@@ -33,7 +32,7 @@ export default {
   name: 'Register',
   data () {
     return {
-      email: '',
+      username: '',
       password: '',
       error: ''
     }
@@ -45,12 +44,12 @@ export default {
     async register () {
       try {
         const response = await AuthenticationService.register({
-          email: this.email,
+          username: this.username,
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        this.$store.dispatch('setAccessLevel', response.data.user.accessLevel)
+        this.$store.dispatch('setAccessLevel', response.data.user.access_level)
         this.$router.push({name: 'root'})
         // console.log(response.data)
       } catch (error) {
@@ -62,7 +61,6 @@ export default {
 </script>
 
 <style scoped>
-
   body{
     background-color: #3f4141;
   }

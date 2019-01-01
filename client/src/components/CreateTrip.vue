@@ -1,7 +1,7 @@
 <template>
   <v-layout >
 
-    <v-flex xs6 offset-xs3 v-if="$store.state.user.accessLevel"> 0>
+    <v-flex xs6 offset-xs3 v-if="$store.state.accessLevel> 0">
       <panel title="Trip Metadata">
         <v-text-field
           label="Title"
@@ -28,16 +28,16 @@
         >
           <v-text-field
             slot="activator"
-            v-model="trip.startDate"
+            v-model="trip.start_date"
             label="Start Date"
             required
             :rules = "[required]"
             readonly
           ></v-text-field>
-          <v-date-picker v-model="trip.startDate" no-title scrollable>
+          <v-date-picker v-model="trip.start_date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="menu1 = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu1.save(startDate)">OK</v-btn>
+            <v-btn flat color="primary" @click="$refs.menu1.save(start_date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
         <v-menu
@@ -53,35 +53,35 @@
         >
           <v-text-field
             slot="activator"
-            v-model="trip.endDate"
+            v-model="trip.end_date"
             label="End Date"
             required
             :rules = "[required]"
             readonly
           ></v-text-field>
-          <v-date-picker v-model="trip.endDate" no-title scrollable>
+          <v-date-picker v-model="trip.end_date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu.save(endDate)">OK</v-btn>
+            <v-btn flat color="primary" @click="$refs.menu.save(end_date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
         <v-text-field
-          label="Minimum Player Score"
+          label="Trip Type"
           required
           :rules = "[required]"
-          v-model="trip.minPlayerRating"
+          v-model="trip.trip_type"
         ></v-text-field>
         <v-text-field
           label="Trip Size"
           required
           :rules = "[required]"
-          v-model="trip.tripSize"
+          v-model="trip.trip_size"
         ></v-text-field>
         <v-text-field
           label="Thumbnail Picture"
           required
           :rules = "[required]"
-          v-model="trip.locationImageURL"
+          v-model="trip.location_image_url"
         ></v-text-field>
         <v-textarea
           outline
@@ -109,23 +109,24 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-import TripsService from '@/services/TripsService'
+import Panel from '../components/Panel'
+import TripsService from '../services/TripsService'
 export default {
   data () {
     return {
       menu: null,
       menu1: null,
+      type_options: ['Casino', 'Cruise'],
       trip: {
         name: null,
         location: null,
-        minPlayerRating: null,
-        tripSize: null,
-        startDate: null,
-        endDate: null,
-        locationImageURL: null,
+        trip_type: null,
+        trip_size: null,
+        start_date: null,
+        end_date: null,
+        location_image_url: null,
         description: null,
-        active: null
+        active: 0
       },
       required: (value) => !!value || 'Required',
       error: null
@@ -146,9 +147,10 @@ export default {
       }
       try {
         const trip = await TripsService.post(this.trip)
-        this.$router.push({
+        console.log(trip)
+        await this.$router.push({
           name: 'ViewTrip',
-          params: {tripId: trip.id}
+          params: {tripId: trip.data.id}
         })
       } catch (err) {
         console.log(err)
