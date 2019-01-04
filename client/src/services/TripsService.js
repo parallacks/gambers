@@ -9,5 +9,8 @@ export default {
   },
   show (tripId) {
     return Api().get(`trips/${tripId}`)
+  },
+  update (tripId, trip) {
+    return Api().post(`trips/${tripId}`, trip)
   }
 }

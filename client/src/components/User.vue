@@ -4,7 +4,7 @@
     <v-flex xs6 offset-xs3 v-if="$store.state.accessLevel> 0 || user.id === this.userId">
       <panel :title="'User Information for: ' +this.user.username">
         <v-text-field
-          label="username"
+          label="Username"
           box
           readonly
           v-model="user.username"></v-text-field>

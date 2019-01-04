@@ -18,6 +18,8 @@ module.exports = (app) => {
     TripsController.show)
   app.post('/trips',
     TripsController.post)
+  app.post('/trips/:tripId',
+    TripsController.update)
   app.get('/users',
     UserController.index)
   app.get('/users/:userId',
