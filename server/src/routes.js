@@ -2,6 +2,7 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy.js')
 const TripsController = require('./controllers/TripsController.js')
 const UserController = require('./controllers/UserController.js')
+const ReservationController = require('./controllers/ReservationController')
 
 module.exports = (app) => {
   app.post('/register',
@@ -23,4 +24,12 @@ module.exports = (app) => {
     UserController.show)
   app.post('/users/:userId',
     UserController.update)
+  app.get('/reservation',
+    ReservationController.index)
+  app.get('/reservation/:reservationId',
+    ReservationController.show)
+  app.post('/reservation',
+    ReservationController.post)
+  app.post('reservation/:reservationId',
+    ReservationController.post)
 }

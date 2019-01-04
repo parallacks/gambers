@@ -7,8 +7,10 @@ import ViewTrip from '../components/ViewTrip'
 import CreateTrip from '../components/CreateTrip'
 import ManageUsers from '../components/ManageUsers'
 import Home from '../components/Home'
-import TripApplication from '../components/TripApplication'
+import Reservation from '../components/Reservation'
 import User from '../components/User'
+import EditTrip from '../components/EditTrip'
+import ViewReservations from '../components/ViewReservations'
 
 Vue.use(Router)
 
@@ -45,19 +47,35 @@ export default new Router({
       component: CreateTrip
     },
     {
+      // TODO Make the new component
+      path: '/edittrip/:tripId',
+      name: 'EditTrip',
+      component: EditTrip
+    },
+    {
       path: '/manageusers',
       name: 'ManageUsers',
       component: ManageUsers
     },
     {
-      path: '/tripapplication',
-      name: 'TripApplication',
-      component: TripApplication
+      path: '/reservation/:tripId',
+      name: 'ReservationWithId',
+      component: Reservation
+    },
+    {
+      path: '/reservation',
+      name: 'Reservation',
+      component: Reservation
     },
     {
       path: '/managerusers/:userId',
       name: 'User',
       component: User
+    },
+    {
+      path: '/viewreservations',
+      name: 'ViewReservations',
+      component: ViewReservations
     }
   ]
 })

@@ -9,7 +9,7 @@
           <v-flex xs4>
             {{trip.location }}
             <br />
-            Starts: {{new Date(trip.start_date).toLocaleDateString("en-US")}}
+            Starts: {{3}}
             <br />
             Ends: {{new Date(trip.end_date).toLocaleDateString("en-US")}}
           </v-flex>
@@ -19,7 +19,7 @@
             v-model="trip.description"></textarea>
             <div>
               <v-btn
-                @click="navigateTo({name: 'TripApplication'})">
+                @click="navigateTo({name: 'Reservation', params: {tripId: trip.id}})">
                 Register Now!
               </v-btn>
             </div>
@@ -44,7 +44,6 @@ export default {
     const tripId = this.$store.state.route.params.tripId
     const tempTrip = await TripsService.show(tripId)
     this.trip = tempTrip.data
-    console.log(this.trip)
     // TODO Something is broken here video 5, 7 mins in
   },
   components: {

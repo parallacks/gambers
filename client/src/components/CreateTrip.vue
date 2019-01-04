@@ -10,10 +10,16 @@
           v-model="trip.name">
         </v-text-field>
         <v-text-field
-          label="Location"
+          label="Destination City"
           required
           :rules = "[required]"
-          v-model="trip.location"
+          v-model="trip.destination"
+        ></v-text-field>
+        <v-text-field
+          label="Departure City"
+          required
+          :rules = "[required]"
+          v-model="trip.departure_city"
         ></v-text-field>
         <v-menu
           ref="menu1"
@@ -37,7 +43,7 @@
           <v-date-picker v-model="trip.start_date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="menu1 = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu1.save(start_date)">OK</v-btn>
+            <v-btn flat color="primary" @click="$refs.menu1.save(trip.start_date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
         <v-menu
@@ -62,7 +68,7 @@
           <v-date-picker v-model="trip.end_date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu.save(end_date)">OK</v-btn>
+            <v-btn flat color="primary" @click="$refs.menu.save(trip.end_date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
         <v-text-field
@@ -105,6 +111,20 @@
         Sorry you don't have the permission needed to access this page. If you believe this is an error please contact your site administrator.
       </panel>
     </v-flex>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="6000"
+      :top="true"
+    >
+      {{ snackbarText }}
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-layout>
 </template>
 
@@ -119,7 +139,8 @@ export default {
       type_options: ['Casino', 'Cruise'],
       trip: {
         name: null,
-        location: null,
+        destination: null,
+        departure_city: null,
         trip_type: null,
         trip_size: null,
         start_date: null,
@@ -128,6 +149,8 @@ export default {
         description: null,
         active: 0
       },
+      snackbarText: '',
+      snackbar: false,
       required: (value) => !!value || 'Required',
       error: null
     }
@@ -137,6 +160,7 @@ export default {
   },
   methods: {
     async create () {
+      // TODO Make this validate correctly with the active not being switched on
       this.error = null
       const areAllFieldsFilled = Object
         .keys(this.trip)
@@ -153,6 +177,8 @@ export default {
           params: {tripId: trip.data.id}
         })
       } catch (err) {
+        this.snackbarText = 'Unable to create trip'
+        this.snackbar = true
         console.log(err)
       }
     }

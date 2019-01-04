@@ -44,6 +44,13 @@
                       {{new Date(trip.start_date).toLocaleDateString("en-US")}} -- {{new Date(trip.end_date).toLocaleDateString("en-US")}}
                     </v-card-text>
                    <v-spacer></v-spacer>
+                    <v-btn
+                      dark
+                      class='black adminBtn'
+                      v-if="$store.state.accessLevel > 0"
+                      @click="navigateTo({name: 'EditTrip', params: {tripId: trip.id}})">
+                      Edit Trip
+                    </v-btn>
                      <v-btn
                       dark
                       class='black'
@@ -76,7 +83,6 @@ export default {
   async mounted () {
     // Request all the songs
     this.trips = (await TripsService.index()).data
-    console.log(this.trips)
   },
   methods: {
     navigateTo (route) {
@@ -92,5 +98,7 @@ export default {
   width: 425px;
   overflow: hidden;
 }
-
+.adminBtn {
+  color: red;
+}
 </style>

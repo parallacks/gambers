@@ -1,6 +1,5 @@
 <template>
   <v-layout >
-
     <v-flex  v-if="$store.state.accessLevel> 0">
       <panel title='Users'>
         <v-card>
@@ -16,12 +15,16 @@
         </v-card>
         <v-data-table
           :headers="this.headers"
-          :items="this.users"
+          :items="this.reservations"
           :search="this.search"
         >
           <template slot="items" slot-scope="props">
-            <tr @click="navigateTo({name: 'User', params: {userId: props.item.id}})">
-              <td>{{props.item.username}}</td>
+            <tr>
+              <td><v-switch v-model="props.item.approval" @click="updateApproval(props.item.id, props.item.approval)">test</v-switch></td>
+              <td>{{props.item.trip_departure}}</td>
+              <td>{{props.item.trip_destination}}</td>
+              <td>{{props.item.trip_start_date}}</td>
+              <td>{{props.item.trip_end_date}}</td>
               <td>{{props.item.email}}</td>
               <td>{{props.item.first_name}}</td>
               <td>{{props.item.last_name}}</td>
@@ -32,7 +35,6 @@
               <td>{{props.item.zip_code}}</td>
               <td>{{props.item.card_name}}</td>
               <td>{{props.item.card_number}}</td>
-              <td>{{props.item.access_level}}</td>
             </tr>
           </template>
         </v-data-table>
@@ -48,26 +50,40 @@
 
 <script>
 import Panel from '../components/Panel'
-import UserService from '../services/UserService'
+import ReservationService from '../services/ReservationService'
 export default {
+  name: 'ViewReservations',
   data () {
     return {
       search: '',
       selected: [],
+      reservations: [],
+      trips: [],
       users: [],
       headers: [{
-        text: 'Username',
-        name: 'username',
-        sortable: true
+        text: 'Approval Status',
+        name: 'approval'
       }, {
-        text: 'Email',
-        name: 'email'
+        text: 'Trip Destination',
+        name: 'destination'
+      }, {
+        text: 'Trip Departure',
+        name: 'departure'
+      }, {
+        text: 'Trip Start Date',
+        name: 'start_date'
+      }, {
+        text: 'Trip End Date',
+        name: 'end_date'
       }, {
         text: 'First Name',
         name: 'first_name'
       }, {
         text: 'Last Name',
         name: 'last_name'
+      }, {
+        text: 'Email',
+        name: 'email'
       }, {
         text: 'Phone Number',
         name: 'phone_number'
@@ -89,22 +105,18 @@ export default {
       }, {
         text: 'Card Number',
         name: 'card_number'
-      }, {
-        text: 'Access Level',
-        name: 'access_level'
-      }
-      ]
+      }]
     }
   },
   components: {
     Panel
   },
   async mounted () {
-    this.users = (await UserService.index()).data
+    this.reservations = (await ReservationService.index()).data
   },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+    async updateApproval () {
+      console.log('Switch clicked')
     }
   }
 }
