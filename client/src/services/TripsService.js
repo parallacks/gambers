@@ -12,5 +12,8 @@ export default {
   },
   update (tripId, trip) {
     return Api().post(`trips/${tripId}`, trip)
+  },
+  deleteTrip (tripId) {
+    return Api().post(`deletetrip/${tripId}`)
   }
 }

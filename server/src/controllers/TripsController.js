@@ -58,5 +58,16 @@ module.exports = {
       res.status(500).send({ error: 'Unable to save changes to the trip.',
                             errors: err})
     }
+  },
+  async deleteTrip (req , res) {
+    try {
+      await Trip.destroy({
+        where: { id: req.params.tripId }
+      })
+      res.send({message: 'Delete successful'})
+    } catch (err) {
+      res.status(500).send({ error: 'Unable to delete the trip.',
+                            errors: err})
+    }
   }
 }

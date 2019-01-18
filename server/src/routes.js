@@ -20,6 +20,8 @@ module.exports = (app) => {
     TripsController.post)
   app.post('/trips/:tripId',
     TripsController.update)
+  app.post('/deletetrip/:tripId',
+    TripsController.deleteTrip)
   app.get('/users',
     UserController.index)
   app.get('/users/:userId',

@@ -160,11 +160,8 @@ export default {
   },
   methods: {
     async create () {
-      // TODO Make this validate correctly with the active not being switched on
       this.error = null
-      const areAllFieldsFilled = Object
-        .keys(this.trip)
-        .every(key => !!this.trip[key])
+      const areAllFieldsFilled = this.checkForm()
       if (!areAllFieldsFilled) {
         this.error = 'Please fill in all the required fields.'
         return
@@ -180,6 +177,18 @@ export default {
         this.snackbarText = 'Unable to create trip'
         this.snackbar = true
         console.log(err)
+      }
+    },
+    checkForm () {
+      if (this.trip.departure_city &&
+        this.trip.destination &&
+        this.trip.start_date &&
+        this.trip.end_date &&
+        this.trip.location_image_url &&
+        this.trip.name &&
+        this.trip.trip_size &&
+        this.trip.trip_type) {
+        return true
       }
     }
   }

@@ -11,6 +11,7 @@ import Reservation from '../components/Reservation'
 import User from '../components/User'
 import EditTrip from '../components/EditTrip'
 import ViewReservations from '../components/ViewReservations'
+import About from '../components/About'
 
 Vue.use(Router)
 
@@ -47,7 +48,6 @@ export default new Router({
       component: CreateTrip
     },
     {
-      // TODO Make the new component
       path: '/edittrip/:tripId',
       name: 'EditTrip',
       component: EditTrip
@@ -76,6 +76,11 @@ export default new Router({
       path: '/viewreservations',
       name: 'ViewReservations',
       component: ViewReservations
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })

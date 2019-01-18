@@ -51,8 +51,6 @@ export default {
         this.$store.dispatch('setUser', response.data.user)
         this.$store.dispatch('setAccessLevel', response.data.user.access_level)
         this.$router.push({name: 'root'})
-        // TODO Remove before release
-        console.log(response.data)
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -64,7 +62,7 @@ export default {
 <style scoped>
 
   body{
-    background-color: #3f4141;
+    background-color: #A9BCD0;
   }
   .error{
     color: black;

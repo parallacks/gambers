@@ -9,7 +9,7 @@
           <v-flex xs4>
             {{trip.location }}
             <br />
-            Starts: {{3}}
+            Starts: {{new Date(trip.start_date).toLocaleDateString("en-US")}}
             <br />
             Ends: {{new Date(trip.end_date).toLocaleDateString("en-US")}}
           </v-flex>
@@ -44,7 +44,6 @@ export default {
     const tripId = this.$store.state.route.params.tripId
     const tempTrip = await TripsService.show(tripId)
     this.trip = tempTrip.data
-    // TODO Something is broken here video 5, 7 mins in
   },
   components: {
     Panel
@@ -67,7 +66,5 @@ textarea{
   overflow: auto;
   height: 600px;
   border: none;
-  border-style: none;
-  border-color: transparent;
 }
 </style>
