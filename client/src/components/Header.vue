@@ -15,6 +15,11 @@
      @click="navigateTo({name: 'Reservation'})">
       Request a Reservation
     </v-btn>
+    <v-btn dark
+      class="black link"
+      @click="navigateTo({name: 'About'})">
+      About Us
+    </v-btn>
   </v-toolbar-items>
   <v-toolbar-items v-if="$store.state.accessLevel>0"  >
     <v-btn class= "black link adminTabs" dark @click="navigateTo({name:'CreateTrip'})" >
@@ -25,6 +30,9 @@
     </v-btn>
     <v-btn class= "black link adminTabs" dark @click="navigateTo({name:'ViewReservations'})" >
       View Registrations
+    </v-btn>
+    <v-btn class="black link adminTabs" dark @click="navigateTo({name:'ManageSite'})">
+      Manage Site Data
     </v-btn>
   </v-toolbar-items>
   <v-spacer></v-spacer>

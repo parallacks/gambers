@@ -8,17 +8,19 @@
           src="../assets/AboutUs.jpg"/>
           Here is some info about us and our company. Aren't we so great?
         </v-flex>
-        <v-layout row wrap>
-          <v-flex v-for= "review in reviews"
-                  class="review"
-                  xs3
-                  elevation-14
-                  :key="review.id">
-            {{review.user}}
-            <br/>
-            {{review.review}}
-          </v-flex>
-        </v-layout>
+        <panel title = "Reviews">
+          <v-layout row wrap>
+            <v-flex v-for= "review in reviews"
+                    class="review"
+                    xs3
+                    elevation-14
+                    :key="review.id">
+              {{review.user}}
+              <br/>
+              {{review.review}}
+            </v-flex>
+          </v-layout>
+        </panel>
       </v-layout>
       <br/>
       <br/>

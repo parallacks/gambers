@@ -12,6 +12,7 @@ import User from '../components/User'
 import EditTrip from '../components/EditTrip'
 import ViewReservations from '../components/ViewReservations'
 import About from '../components/About'
+import ManageSite from '../components/ManageSite'
 
 Vue.use(Router)
 
@@ -81,6 +82,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/managesite',
+      name: 'ManageSite',
+      component: ManageSite
     }
   ]
 })
